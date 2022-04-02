@@ -7,22 +7,35 @@ import Constants from '../../Constants'
 
 import { apiData } from '../../services/apiData';
 
-import {IBlockChainData} from '../../interfaces';
+import {IStore} from '../../interfaces';
 
 const Home: React.FC = () => {
 
-  const [data, setData] = useState<IBlockChainData>({} as IBlockChainData);
+  const [data, setData] = useState<IStore[]>([]);
 
   useEffect(() => {
     apiData.get('stores').then(
-      res => console.log(res.data)
+      res => {
+        setData(res.data)
+      }
     )
   }, [])
 
   return(
     <>
       <Nav />
-      <h1>Home page</h1>
+      <h1>Listando Lojas</h1>
+      {data.map( (el, index) => (
+        <>
+          <div key={index}>
+            <h2>{el.label}</h2>
+            <img src={el.logo} alt={el.label} width={300} height={'auto'}/>
+            <p>{el.address.street}</p>
+            <p>{el.address.city}</p>
+            <p>{el.address.state}</p>
+          </div>
+        </>
+      ))}
       <Footer />
     </>
   )

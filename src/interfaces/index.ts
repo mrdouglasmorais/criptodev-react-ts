@@ -1,16 +1,17 @@
-export interface IBlockChainData{
-  data: {
-    items: IBlockChainDataItems[]
-  };
-}
+export interface IStore{
 
-export interface IBlockChainDataItems {
-  minedInBlockHash: string;
-  minedInBlockHeight: number;
-  recipients: IRecipientData[]
-}
+  id: number;
+  label: string;
+  logo: string;
+  localization: {
+    lat: number,
+    lng: number
+  },
+  address: {
+    street: string,
+    zipcode: string,
+    city: string,
+    state: string,
+  }
 
-export interface IRecipientData{
-  address: string;
-  amount: string;
 }
